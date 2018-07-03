@@ -1,0 +1,10 @@
+[greetings]
+hi; bye (informal) = 안녕
+hello = 안녕하 세요
+goodbye (standard, to person leaving) = 안녕히 가세요
+goodbye (standard, you are leaving) = '안녕히 겨세요
+
+[dva]
+How frustrating! (respawn quote) = 짜증나
+Time to raisie my APM! (defense matrix) = APM 좀 올려볼까
+Ultimate blocked! = 궁극기 차딘
