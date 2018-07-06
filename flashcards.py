@@ -6,15 +6,16 @@ import re
 
 vocab_groups = []
 
+def verify_args(args):
+    if len(args) < 2:
+        stat.print_warn('This script must be run with at least one vocabulary lists. Please view the documentation to learn how to create it.')
+        stat.print_warn('Usage: python3 flashcard.py filename [filenames]')
+        stat.print_warn('Example: python3 flashcard.py ~/vocab_list.txt ~/food.txt ~/fun.txt')
+        sys.exit(0)
 
-if len(sys.argv) < 2:
-    stat.print_warn('This script must be run with at least one vocabulary lists. Please view the documentation to learn how to create it.')
-    stat.print_warn('Usage: python3 flashcard.py filename [filenames]')
-    stat.print_warn('Example: python3 flashcard.py ~/vocab_list.txt ~/food.txt ~/fun.txt')
-    sys.exit(0)
-
-filename = sys.argv[1]
-
+def parse_files(files):
+    
+    
 try:
     file = open(filename, 'r')
     vocab_raw = file.read()
@@ -46,3 +47,6 @@ for tmp in vocab_groups:
 # while new_group != '!quit':
 #     active_groups = []
 #     
+
+def init(args):
+    pass
