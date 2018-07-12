@@ -11,6 +11,12 @@ Documentation to come soon...
 2. Make a vocab list (But it can be anything really). See vocab_kr.txt for a sample of what it should look like.
 3. Run app.py (example: python3 app.py vocab_kr.txt)
 
+## Why Should I Use This Over Other Flashcard Apps?
+- **Speed:** A CLI is theoretically faster than a GUI, and this app requires you to edit a text file.
+- **Portability:** All you currently need  is a Python interpreter to run this.
+- **Light-weight:** Does not have any complicated animations and shit. It's just a command line.
+- **Feels good** You totally look like a hacker using the command line.
+
 ## What Works
 ### (aka tested and confirmed)
 - 1 text file
