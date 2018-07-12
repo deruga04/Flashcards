@@ -14,7 +14,7 @@ Documentation to come soon...
 ## Why Should I Use This Over Other Flashcard Apps?
 - **Speed:** A CLI is theoretically faster than a GUI, and this app requires you to edit a text file.
 - **Portability:** All you currently need  is a Python interpreter to run this.
-- **Light-weight:** Does not have any complicated animations and shit. It's just a command line.
+- **Light-weight:** Does not have any complicated animations and shit. It's literally just a command line.
 - **Feels good** You totally look like a hacker using the command line.
 
 ## What Works
