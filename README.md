@@ -2,7 +2,7 @@ This is an working, yet incomplete product, so you'll have to go through a few h
 
 Documentation to come soon...
 
-0. Install python3
+🐍. Install python3
 1. Download this repo
 2. Make a vocab list (But it can be anything really). See vocab_kr.txt for a sample of what it should look like.
 3. Run app.py (example: python3 app.py vocab_kr.txt)
