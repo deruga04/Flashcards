@@ -10,5 +10,6 @@ Documentation to come soon...
 TODO:
 - Make this readme better
 - Add feature to add/omit groups inside the program
+- Unit tests
 - Make this easier to run for the technically-unsavy
 - Official user manual
