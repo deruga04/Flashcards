@@ -1,5 +1,4 @@
-This is an working, yet incomplete product, so you'll have to go through a few
-to run it.
+This is an working, yet incomplete product, so you'll have to go through a few hoops to run it.
 
 Documentation to come soon...
 
