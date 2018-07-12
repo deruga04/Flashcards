@@ -1,8 +1,9 @@
-import random
+import random as rand
 import vocab as vocab
 import sys
 import status_messages as stat
 import re
+import traceback
 
 vocab_groups = []
 
@@ -12,36 +13,52 @@ def verify_args(args):
         stat.print_warn('Usage: python3 flashcard.py filename [filenames]')
         stat.print_warn('Example: python3 flashcard.py ~/vocab_list.txt ~/food.txt ~/fun.txt')
         sys.exit(0)
+    else:
+        stat.print_success('Yep, everything looks good.')
 
-def parse_files(files):
-    
-    
-try:
-    file = open(filename, 'r')
-    vocab_raw = file.read()
-except:
-    stat.print_fail('File location ' + ' not found. Please double-check the file name and make sure it exists.')
-    sys.exit(0)
+def parse_files(filenames):
+    for filename in filenames:
+        try:
+            file = open(filename, 'r')
+            vocab_raw = file.read()
+            stat.print_success('File ' + filename + ' found!')
+            print('Building vocabulary list...')
+            vocab_raw = vocab_raw.strip()
+            groups = re.split(r'\n{2,}', vocab_raw)
 
-stat.print_success('File ' + filename + ' found!')
-print('Building vocabulary list...')
+            for g in groups:
+                group_parse = g.split('\n')
+                group_name = group_parse[0]
+                group_list = {}
 
-vocab_raw = vocab_raw.strip()
-groups = re.split(r'\n{2,}', vocab_raw)
+                for p in group_parse[1:]:
+                    pair = re.split(r'(\b=\b|\s{1,}=\s{1,})', p)
+                    print(pair[0] + ' ' + pair[2])
+                    group_list[pair[0]] = pair[2]
 
-for g in groups:
-    group_parse = g.split('\n')
-    group_name = group_parse[0]
-    group_list = []
+                vocab_groups.append(vocab.Vocab(group_name, group_list))
 
-    for p in group_parse[1:]:
-        pair = re.split(r'(\b=\b|\s{1,}=\s{1,})', p)
-        group_list.append((pair[0], pair[2]))
 
-    vocab_groups.append(vocab.Vocab(group_name, group_list))
+        except Exception as e:
+            stat.print_fail('File location ' + filename + ' not found. Please double-check the file name and make sure it exists.')
+            print(traceback.format_exc())
 
-for tmp in vocab_groups:
-    print(tmp.tostr())
+    return vocab_groups
+
+def display_game(groups):
+    user_input = ''
+    stat.print_input('Welcome! The vocab game will now start. You can quit any time by entering !quit into the console.')
+    while user_input != '!quit':
+        group = rand.choice(groups)
+        word = rand.choice(list(group.get_vocab_list().keys()))
+        user_input = input('What is ' + word + '?')
+        if group.check(word, user_input):
+            stat.print_success('Correct!')
+        else:
+            stat.print_fail('So close! The correct word was ' + group.get_answer(word))
+
+# for tmp in vocab_groups:
+#     print(tmp.tostr())
 
 # new_group = ''
 # while new_group != '!quit':
@@ -49,4 +66,9 @@ for tmp in vocab_groups:
 #     
 
 def init(args):
-    pass
+    verify_args(args)
+    vocab_groups = parse_files(args[1:])
+    # vocab_group_names = list(map(lambda x: x.get_name(), vocab_groups))
+    vocab_name_group = {vg.get_name():vg for vg in vocab_groups}
+    print(vocab_name_group)
+    display_game(vocab_groups)
