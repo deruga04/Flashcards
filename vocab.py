@@ -18,15 +18,22 @@ class Vocab:
     def tostr(self):
         return self.group_name + '\n' + str(self.vocab_list)
 
-    # I don't think this will ever be used but just in case
-    def set_name(self, new_name):
-        self.group_name = new_name
-
-    def set_vocab_list(self, new_vocab_list):
-        self.vocab_list = new_vocab_list
-
     def check(self, word, guess):
+        if not isinstance(word, str) or not isinstance(guess, str):
+            return False
+        if not word in self.vocab_list:
+            return False
         return self.vocab_list[word] == guess
 
     def get_answer(self, word):
         return self.vocab_list[word]
+
+    # I don't think this will ever be used but just in case
+    def set_name(self, new_name):
+        if isinstance(new_name, str):
+            self.group_name = new_name
+
+    def set_vocab_list(self, new_vocab_list):
+        if not isinstance(new_vocab_list, dict):
+            self.vocab_list = new_vocab_list
+

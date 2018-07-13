@@ -1,0 +1,4 @@
+[dva]
+How frustrating! (respawn quote) = 짜증나
+Time to raisie my APM! (defense matrix) = APM 좀 올려볼까
+Ultimate blocked! = 궁극기 차딘
