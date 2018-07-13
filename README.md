@@ -8,7 +8,7 @@ Documentation to come soon...
 
 :snake:. Install python3
 1. Download this repo
-2. Make a vocab list (But it can be anything really). See vocab_kr.txt for a sample of what it should look like.
+2. Make a list of matching pairs. See vocab_kr.txt for a sample of what it should look like.
 3. Run app.py (example: python3 app.py vocab_kr.txt)
 
 ## Why Should I Use This Over Other Flashcard Apps?
