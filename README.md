@@ -17,6 +17,9 @@ Documentation to come soon...
 - **Light-weight:** Does not have any complicated animations and shit. It's literally just a command line.
 - **Feels good** You totally look like a hacker using the command line.
 
+## Do you have any screenshots?
+[Yes just one.](https://imgur.com/a/uuBiZD3)
+
 ## What Works
 ### (aka tested and confirmed)
 - 1 text file
