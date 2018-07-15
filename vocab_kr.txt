@@ -42,4 +42,3 @@ bibimbap = 비빔밥
 pork bone soup = 감자탕
 banana = 바나나
 kimchi=김치
-

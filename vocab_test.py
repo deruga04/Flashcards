@@ -36,6 +36,14 @@ class VocabTest(unittest.TestCase):
         self.assertIsInstance(v_blank.get_name(), str)
         self.assertIsInstance(list0, dict)
 
+
+        #holy mother of
+        
+
+    def test_holy_mother_of_symbols(self):
+        v = vocab.Vocab('[[[[]gorp!@)(87845,./;[]|\\-_=+)]][][]', {})
+        self.assertEqual(v.get_name(), '[[[]gorp!@)(87845,./;[]|\\-_=+)]][][')
+
     def test_get_name(self):
         name = 'test'
         dict1 = {'hi': '1101',

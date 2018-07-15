@@ -6,7 +6,8 @@ class Vocab:
     vocab_list = {}
 
     def __init__(self, name = 'default name', vocab = {}):
-        self.group_name = re.sub(r'[^a-z\s]', '', name)
+        self.group_name = re.sub(r'^[[]|[]]$', '', name)
+        # self.group_name = re.sub(r'[^a-z\s]', '', name)
         self.vocab_list = vocab
 
     def get_name(self):

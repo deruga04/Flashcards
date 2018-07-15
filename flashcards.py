@@ -36,6 +36,8 @@ def parse_files(filenames):
                 group_name = group_parse[0]
                 group_list = {}
 
+                # print(group_name)
+
                 for p in group_parse[1:]:
                     # pair = re.split(r'(\b=\b|\s{1,}=\s{1,})', p)
                     pair = p.split('=')
