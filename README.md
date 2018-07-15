@@ -18,7 +18,7 @@ Documentation to come soon...
 - **Feels good** You totally look like a hacker using the command line.
 
 ## Do you have any screenshots?
-[Yes just one.](https://imgur.com/a/uuBiZD3)
+[Yes just one.](https://i.imgur.com/7xB1O2j.png)
 
 ## What Works
 ### (aka tested and confirmed)
