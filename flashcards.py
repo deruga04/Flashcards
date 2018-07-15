@@ -8,13 +8,18 @@ import traceback
 vocab_groups = []
 
 def verify_args(args):
-    if len(args) < 2:
+    try:
+        if len(args) < 2:
+            raise ValueError
+        stat.print_success('Yep, everything looks good.')
+    except ValueError:
         stat.print_warn('This script must be run with at least one vocabulary lists. Please view the documentation to learn how to create it.')
         stat.print_warn('Usage: python3 flashcard.py filename [filenames]')
         stat.print_warn('Example: python3 flashcard.py ~/vocab_list.txt ~/food.txt ~/fun.txt')
         sys.exit(0)
-    else:
-        stat.print_success('Yep, everything looks good.')
+
+def group_contains(vocab_groups):
+    pass
 
 def parse_files(filenames):
     for filename in filenames:
@@ -32,9 +37,10 @@ def parse_files(filenames):
                 group_list = {}
 
                 for p in group_parse[1:]:
-                    pair = re.split(r'(\b=\b|\s{1,}=\s{1,})', p)
-                    print(pair[0] + ' ' + pair[2])
-                    group_list[pair[0]] = pair[2]
+                    # pair = re.split(r'(\b=\b|\s{1,}=\s{1,})', p)
+                    pair = p.split('=')
+                    group_list[pair[0].strip()] = pair[1].strip()
+
 
                 vocab_groups.append(vocab.Vocab(group_name, group_list))
 
@@ -47,8 +53,8 @@ def parse_files(filenames):
 
 def display_game(groups):
     user_input = ''
-    stat.print_input('Welcome! The vocab game will now start. You can quit any time by entering !quit into the console.')
-    while user_input != '!quit':
+    stat.print_input('Welcome! The vocab game will now start. You can quit any time by entering !! into the console.')
+    while user_input != '!!':
         group = rand.choice(groups)
         word = rand.choice(list(group.get_vocab_list().keys()))
         user_input = input('What is ' + word + '?')

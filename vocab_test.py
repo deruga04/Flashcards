@@ -17,24 +17,24 @@ class VocabTest(unittest.TestCase):
 
         v0 = vocab.Vocab(name, dict1)
 
-        self.assertTrue(v0.get_name() == 'test')
+        self.assertEqual(v0.get_name(), 'test')
         # self.assertTrue(False)
         list0 = v0.get_vocab_list()
-        self.assertTrue(isinstance(v0.get_name(), str))
-        self.assertTrue(isinstance(list0, dict))
-        self.assertTrue('hi' in list0)
-        self.assertTrue(list0['hi'] == '1101')
-        self.assertTrue('goodbye' in list0)
-        self.assertTrue(list0['goodbye'] == '1000029')
-        self.assertTrue('au revoir' in list0)
-        self.assertTrue(list0['au revoir'] == 'shit')
+        self.assertIsInstance(v0.get_name(), str)
+        self.assertIsInstance(list0, dict)
+        self.assertIn('hi', list0)
+        self.assertEqual(list0['hi'], '1101')
+        self.assertIn('goodbye', list0)
+        self.assertEqual(list0['goodbye'], '1000029')
+        self.assertIn('au revoir', list0)
+        self.assertEqual(list0['au revoir'], 'shit')
 
         v_blank = vocab.Vocab()
 
-        self.assertTrue(v_blank.get_name() == 'default name')
-        self.assertTrue(v_blank.get_vocab_list() == {})
-        self.assertTrue(isinstance(v_blank.get_name(), str))
-        self.assertTrue(isinstance(list0, dict))
+        self.assertEqual(v_blank.get_name(), 'default name')
+        self.assertEqual(v_blank.get_vocab_list(), {})
+        self.assertIsInstance(v_blank.get_name(), str)
+        self.assertIsInstance(list0, dict)
 
     def test_get_name(self):
         name = 'test'
@@ -44,8 +44,8 @@ class VocabTest(unittest.TestCase):
                 }
         v = vocab.Vocab(name, dict1)
 
-        self.assertTrue(isinstance(v.get_name(), str))
-        self.assertTrue(v.get_name() == 'test')
+        self.assertIsInstance(v.get_name(), str)
+        self.assertEqual(v.get_name(), 'test')
 
     def test_get_vocab_list(self):
         name = 'test'
@@ -55,8 +55,9 @@ class VocabTest(unittest.TestCase):
                 }
         v = vocab.Vocab(name, dict1)
 
-        self.assertTrue(isinstance(v.get_vocab_list(), dict))
-        self.assertTrue(v.get_vocab_list() == {'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
+        # self.assertTrue(isinstance(v.get_vocab_list(), dict))
+        self.assertIsInstance(v.get_vocab_list(), dict)
+        self.assertEqual(v.get_vocab_list(), {'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
 
     def test_set_name(self):
         name = 'test'
@@ -66,12 +67,10 @@ class VocabTest(unittest.TestCase):
                 }
         v = vocab.Vocab(name, dict1)
 
-        self.assertTrue(v.get_name() == 'test')
+        self.assertEqual(v.get_name(), 'test')
         v.set_name('billy bob')
-        self.assertTrue(v.get_name() == 'billy bob')
-        self.assertTrue(v.get_vocab_list() == {'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
-
-        
+        self.assertEqual(v.get_name(), 'billy bob')
+        self.assertEqual(v.get_vocab_list(), {'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
 
     def test_set_vocab_list(self):
         name = 'test'
@@ -81,9 +80,9 @@ class VocabTest(unittest.TestCase):
                 }
         v = vocab.Vocab(name, dict1)
 
-        self.assertTrue(v.get_vocab_list() == {'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
+        self.assertEqual(v.get_vocab_list(), {'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
         v.set_vocab_list({'hi': '1101', 'goodbye': '1000029', 'au revoir': 'shit'})
-        self.assertTrue(v.get_name() == 'test')
+        self.assertEqual(v.get_name(), 'test')
 
     def test_check(self):
         name = 'test'

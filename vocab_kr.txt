@@ -2,7 +2,7 @@
 hi; bye (informal)     =       안녕
 hello = 안녕하 세요
 goodbye (standard, to person leaving) = 안녕히 가세요
-goodbye (standard, you are leaving) = 안녕히 겨세요
+goodbye (standard, you are leaving) = 안녕히 계세요
 
 [food]
 food=음식
