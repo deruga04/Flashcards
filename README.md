@@ -25,7 +25,6 @@ Documentation to come soon...
 - 1 text file
 - Any number => 2 of newlines between groups is fine
 - Any number of spaces between the two words and '=' is fine
-- Any group name as long as there are no symbols (e.g. !, @, #, [, ])
 
 ## What's Broken
 - Probably everything else
