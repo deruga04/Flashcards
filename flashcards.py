@@ -24,7 +24,7 @@ def group_contains(vocab_groups):
 def parse_files(filenames):
     for filename in filenames:
         try:
-            file = open(filename, 'r')
+            file = open(filename, 'r', encoding='utf-8')
             vocab_raw = file.read()
             stat.print_success('File ' + filename + ' found!')
             print('Building vocabulary list...')
