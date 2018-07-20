@@ -6,10 +6,15 @@ Documentation to come soon...
 
 ## Quick-Start Guide
 
+### Linux/Mac
 :snake:. Install python3
 1. Download this repo
 2. Make a list of matching pairs. See vocab_kr.txt for a sample of what it should look like.
 3. Run app.py (example: python3 app.py vocab_kr.txt)
+
+### Windows
+1. Get Linux shell
+2. Follow instructions for Linux/Mac
 
 ## Why Should I Use This Over Other Flashcard Apps?
 - **Speed:** A CLI is theoretically faster than a GUI, and this app requires you to edit a text file.
