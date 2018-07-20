@@ -59,9 +59,11 @@ def display_game(groups):
     while user_input != '!!':
         group = rand.choice(groups)
         word = rand.choice(list(group.get_vocab_list().keys()))
-        user_input = input('What is ' + word + '?')
+        user_input = input(word + ': ')
         if group.check(word, user_input):
             stat.print_success('Correct!')
+        elif user_input == '!!':
+            pass
         else:
             stat.print_fail('So close! The correct word was ' + group.get_answer(word))
 
@@ -78,5 +80,4 @@ def init(args):
     vocab_groups = parse_files(args[1:])
     # vocab_group_names = list(map(lambda x: x.get_name(), vocab_groups))
     vocab_name_group = {vg.get_name():vg for vg in vocab_groups}
-    print(vocab_name_group)
     display_game(vocab_groups)
