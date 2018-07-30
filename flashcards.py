@@ -29,18 +29,18 @@ class MenuState(State):
         return keys
 
     def print_help(self):
-        stat.print_input('Select groups to include. Enter >> to start game.\n')
-        stat.print_input('Available groups:')
-        stat.print_input(str(self.dict_keys_to_list(self.flashcards.vocab_name_group)) + '\n')
-        stat.print_input('Active groups:')
-        stat.print_input(str(self.dict_keys_to_list(self.flashcards.active_groups)) + '\n')
-        stat.print_input('Available commands:')
-        stat.print_input('addall - adds all groups to active groups')
-        stat.print_input('removeall - removes all groups from active groups')
-        stat.print_input('add [group] - add one groups from active groups')
-        stat.print_input('remove [group] - remove one groups from active groups')
-        stat.print_input('>> - start the game')
-        stat.print_input('?? - display this message\n')
+        print('Select groups to include. Enter >> to start game.\n')
+        print('Available groups:')
+        print(str(self.dict_keys_to_list(self.flashcards.vocab_name_group)) + '\n')
+        print('Active groups:')
+        print(str(self.dict_keys_to_list(self.flashcards.active_groups)) + '\n')
+        print('Available commands:')
+        print('addall - adds all groups to active groups')
+        print('rmall - removes all groups from active groups')
+        print('add [group] - add one groups from active groups')
+        print('rm [group] - remove one groups from active groups')
+        print('>> - start the game')
+        print('?? - display this message\n')
 
     def display(self):
         in_menu = True
@@ -57,7 +57,7 @@ class MenuState(State):
             if parse_input[0] == 'addall':
                 stat.print_success('Added all groups.')
                 self.flashcards.active_groups = self.flashcards.vocab_name_group
-            elif parse_input[0] == 'removeall':
+            elif parse_input[0] == 'rmall':
                 stat.print_success('Removed all groups.')
                 self.flashcards.active_groups = {}
             elif parse_input[0] == 'add':
@@ -66,20 +66,24 @@ class MenuState(State):
                     stat.print_input('Usage: add [group name]')
                 elif not new_group in self.flashcards.vocab_name_group:
                     stat.print_fail('Group not found')
+                    print()
                 else:
                     key = new_group
                     value = self.flashcards.vocab_name_group[new_group]
                     self.flashcards.to_active(key, value)
-            elif parse_input[0] == 'remove':
+            elif parse_input[0] == 'rm':
                 key = parse_input[2]
-                try:
-                    self.flashcards.vocab_name_group.pop()
-                except KeyError:
-                    stat.print_warn('Group not found.')
+                if key in self.flashcards.vocab_name_group:
+                    self.flashcards.active_groups.pop(str(key))
+                else:
+                    stat.print_fail('Group not found.')
             elif parse_input[0] == '>>':
                 self.flashcards.set_state(self.flashcards.game_state)
             elif parse_input[0] == '??':
                 self.print_help()
+            else:
+                stat.print_fail('Invalid command.')
+                print()
 
 
 
