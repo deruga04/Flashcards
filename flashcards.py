@@ -22,25 +22,104 @@ class MenuState(State):
         self.flashcards = new_flashcards
 
     def dict_keys_to_list(self, dictionary):
-        return [dictionary.keys()]
+
+        keys = []
+        for k in dictionary.keys():
+            keys.append(k)
+        return keys
+
+    def print_help(self):
+        stat.print_input('Select groups to include. Enter >> to start game.\n')
+        stat.print_input('Available groups:')
+        stat.print_input(str(self.dict_keys_to_list(self.flashcards.vocab_name_group)) + '\n')
+        stat.print_input('Active groups:')
+        stat.print_input(str(self.dict_keys_to_list(self.flashcards.active_groups)) + '\n')
+        stat.print_input('Available commands:')
+        stat.print_input('addall - adds all groups to active groups')
+        stat.print_input('removeall - removes all groups from active groups')
+        stat.print_input('add [group] - add one groups from active groups')
+        stat.print_input('remove [group] - remove one groups from active groups')
+        stat.print_input('>> - start the game')
+        stat.print_input('?? - display this message\n')
 
     def display(self):
-        user_input = ''
-        while user_input != '>>':
-            stat.print_input('Select groups to include. Enter >> to start game.')
+        in_menu = True
+        self.print_help()
+
+        while in_menu:
+            
+
+            user_input = input('[>] ')
+            parse_input = user_input.partition(' ')
+
+            print()
+
+            if parse_input[0] == 'addall':
+                stat.print_success('Added all groups.')
+                self.flashcards.active_groups = self.flashcards.vocab_name_group
+            elif parse_input[0] == 'removeall':
+                stat.print_success('Removed all groups.')
+                self.flashcards.active_groups = {}
+            elif parse_input[0] == 'add':
+                new_group = parse_input[2]
+                if new_group == '':
+                    stat.print_input('Usage: add [group name]')
+                elif not new_group in self.flashcards.vocab_name_group:
+                    stat.print_fail('Group not found')
+                else:
+                    key = new_group
+                    value = self.flashcards.vocab_name_group[new_group]
+                    self.flashcards.to_active(key, value)
+            elif parse_input[0] == 'remove':
+                key = parse_input[2]
+                try:
+                    self.flashcards.vocab_name_group.pop()
+                except KeyError:
+                    stat.print_warn('Group not found.')
+            elif parse_input[0] == '>>':
+                self.flashcards.set_state(self.flashcards.game_state)
+            elif parse_input[0] == '??':
+                self.print_help()
+
+
+
             stat.print_input('Available groups:')
-            stat.print_input('Available commands')
+            stat.print_input(str(self.dict_keys_to_list(self.flashcards.vocab_name_group)) + '\n')
+            stat.print_input('Active groups:')
+            stat.print_input(str(self.dict_keys_to_list(self.flashcards.active_groups)) + '\n')
 
 
+            # if len(user_input.split(' ')) == 1:
+            #     if user_input == '>>':
+            #         in_menu = False
+            #         self.flashcards.set_state(self.flashcards.game_state)
+            #     elif user_input == 'addall':
+            #         stat.print_success('Added all groups.')
+            #         self.flashcards.active_groups = self.flashcards.vocab_name_group
+            #     elif user_input == 'removeall':
+            #         stat.print_success('Removed all groups.')
+            #         self.flashcards.active_groups = {}
+            #     else:
+            #         stat.print_fail('Invalid command.')
 
+            # elif len(user_input.split(' ')) > 1:
+            #     command, name = user_input.split(' ')
+            #     if command == 'add':
+            #         pass #TODO
+            #     elif command == 'remove':
+            #         pass #TODO
+            #     else:
+            #         stat.print_fail('Invalid command.')
 
 class GameState(State):
     def __init__(self, new_flashcards):
         self.flashcards = new_flashcards
 
-    def display():
+    def display(self):
         user_input = ''
         stat.print_input('Welcome! The vocab game will now start. You can quit any time by entering !! into the console.')
+        stat.print_input('Go back by entering \'<<\'')
+        stat.print_input('Quit by entering \'<<\'')
         while user_input != '!!':
             group = rand.choice(groups)
             word = rand.choice(list(group.get_vocab_list().keys()))
@@ -63,11 +142,14 @@ class Flashcards:
         
         self.vocab = self.parse_files(args[1:])
         self.vocab_name_group = {vg.get_name():vg for vg in self.vocab}
+        self.active_groups = {}
 
-
+        self.state = self.menu_state
+        self.state.display()
 
     def set_state(self, state):
         self.state = state
+        self.state.display()
 
     def verify_args(self, args):
         try:
@@ -105,6 +187,10 @@ class Flashcards:
                     for p in group_parse[1:]:
                         # pair = re.split(r'(\b=\b|\s{1,}=\s{1,})', p)
                         pair = p.split('=')
+                        # print(pair[0] + pair[1])
+                        if pair[0].strip in vocab_groups:
+                            stat.print_warn('Duplicate group name: ' + pair[0].strip() + '. Only the most recent entry will be entered.')
+
                         group_list[pair[0].strip()] = pair[1].strip()
 
 
@@ -116,3 +202,7 @@ class Flashcards:
                 print(traceback.format_exc())
 
         return vocab_groups
+
+
+    def to_active(self, key, value):
+        self.active_groups[key] = value

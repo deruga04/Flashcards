@@ -95,6 +95,45 @@ seven=일곱
 eight=여덟
 nine=아홉
 ten=열
+one (ch)=일
+two (ch)=이
+three (ch)=삼
+four (ch)=사
+five (ch)=요
+six (ch)=육
+seven (ch)=칠
+eight (ch)=팔
+nine (ch)=구
+ten (ch)=십
+hundred=백
+thousand=천
+ten thousand=만
+hundred thousand=십만
+
+[demonstratives]
+this=이거
+that (2nd person)=그거
+that (3rd person)=저거
+
+[store objects]
+watch/clock=시계
+umbrella=우산
+ball-point pen=볼펜
+cell phone=휴대 전화
+cigarette=담배
+Korean (language)=한국어
+dictionary=사전
+newspaper=신문
+bag=가방
+camera=카메라
+skirt=치마
+pencil=연필
+book=책
+hat=모자
+dress shoes=구두
+pants=바지
+notebook=공책
+money=돈
 
 [verbs]
 to to give=주다
@@ -105,12 +144,8 @@ to read=얽다
 to come=오다
 to wait=기다리다
 to write=쓰다
-
-[good shit]
-shut up = 닥쳐
-this is fucked up = 좆같네
-you dumbass = 병신아
-slut, hoe, whore = 창녀
-vagina = 보지
-bullshit = 지랄하네
-fucking good = 졸라 좋아
+to have=있다
+not to have=없다
+how much?=얼마
+KRW, won=원
+then/in that case=그럼
