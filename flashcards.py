@@ -40,6 +40,7 @@ class MenuState(State):
         print('add [group] - add one groups from active groups')
         print('rm [group] - remove one groups from active groups')
         print('>> - start the game')
+        print('!! - quit')
         print('?? - display this message\n')
 
     def display(self):
@@ -55,32 +56,41 @@ class MenuState(State):
             print()
 
             if parse_input[0] == 'addall':
-                stat.print_success('Added all groups.')
+                stat.print_success('Added all groups.\n')
                 self.flashcards.active_groups = self.flashcards.vocab_name_group
+
             elif parse_input[0] == 'rmall':
-                stat.print_success('Removed all groups.')
+                stat.print_success('Removed all groups.\n')
                 self.flashcards.active_groups = {}
+
             elif parse_input[0] == 'add':
                 new_group = parse_input[2]
                 if new_group == '':
                     stat.print_input('Usage: add [group name]')
                 elif not new_group in self.flashcards.vocab_name_group:
-                    stat.print_fail('Group not found')
-                    print()
+                    stat.print_fail('Group not found\n')
                 else:
                     key = new_group
                     value = self.flashcards.vocab_name_group[new_group]
                     self.flashcards.to_active(key, value)
+
             elif parse_input[0] == 'rm':
                 key = parse_input[2]
                 if key in self.flashcards.vocab_name_group:
                     self.flashcards.active_groups.pop(str(key))
                 else:
-                    stat.print_fail('Group not found.')
+                    stat.print_fail('Group not found.\n')
+           
             elif parse_input[0] == '>>':
                 self.flashcards.set_state(self.flashcards.game_state)
+            
             elif parse_input[0] == '??':
                 self.print_help()
+            
+            elif parse_input[0] == '!!':
+                print('Bye, bitch.')
+                sys.exit(0)
+            
             else:
                 stat.print_fail('Invalid command.')
                 print()
@@ -119,14 +129,25 @@ class GameState(State):
     def __init__(self, new_flashcards):
         self.flashcards = new_flashcards
 
+    def print_help(self):
+        print('Available commands:')
+        print('<< - go back')
+        print('!! - quit')
+        print('?? - display this message\n')
+
     def display(self):
+        print('Welcome! The vocab game will now start.')
+        self.print_help()
+
+        groups = self.flashcards.active_groups
+
         user_input = ''
-        stat.print_input('Welcome! The vocab game will now start. You can quit any time by entering !! into the console.')
-        stat.print_input('Go back by entering \'<<\'')
-        stat.print_input('Quit by entering \'<<\'')
+
         while user_input != '!!':
-            group = rand.choice(groups)
-            word = rand.choice(list(group.get_vocab_list().keys()))
+
+            group_name, word_list = rand.choice(list(groups.items()))
+            print(type(group_name))
+            word = rand.choice(word_list)
             user_input = input(word + ': ')
             if group.check(word, user_input):
                 stat.print_success('Correct!')
