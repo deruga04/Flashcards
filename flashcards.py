@@ -146,15 +146,15 @@ class GameState(State):
         while user_input != '!!':
 
             group_name, word_list = rand.choice(list(groups.items()))
-            print(type(group_name))
-            word = rand.choice(word_list)
-            user_input = input(word + ': ')
-            if group.check(word, user_input):
+            word = rand.choice(list(word_list.get_vocab_list().items()))
+            user_input = input(word[0] + ': ')
+            if user_input == word[1]:
                 stat.print_success('Correct!')
             elif user_input == '!!':
-                pass
+                print('Bye, bitch.')
+                sys.exit(0)
             else:
-                stat.print_fail('So close! The correct word was ' + group.get_answer(word))
+                stat.print_fail('So close! The correct word was ' + word[1])
 
 
 class Flashcards:
