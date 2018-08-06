@@ -16,6 +16,10 @@ class Vocab:
     def get_vocab_list(self):
         return copy.deepcopy(self.vocab_list)
 
+    def get_vocab_list_as_list(self):
+        l = self.get_vocab_list()
+        return list(l.items())
+
     def tostr(self):
         return self.group_name + '\n' + str(self.vocab_list)
 

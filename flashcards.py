@@ -140,10 +140,14 @@ class GameState(State):
 
         groups = self.flashcards.active_groups
 
-        while True:
+        word_list = []
+        for key, value in groups.items():
+            word_list.extend(value.get_vocab_list_as_list())
+        #word_list = word_list.extend(list(g.get_vocab_list_as_list() for g in list(groups.values())))
 
-            group_name, word_list = rand.choice(list(groups.items()))
-            word = rand.choice(list(word_list.get_vocab_list().items()))
+        while True:
+            word = rand.choice(word_list)
+
             user_input = input(word[0] + ': ')
             if user_input == word[1]:
                 stat.print_success('Correct!')
