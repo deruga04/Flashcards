@@ -142,9 +142,9 @@ class GameState(State):
 
         word_list = []
         for key, value in groups.items():
-            word_list.extend(value.get_vocab_list_as_list())
-        #word_list = word_list.extend(list(g.get_vocab_list_as_list() for g in list(groups.values())))
+            word_list.extend(list(value.get_vocab_list().items()))
 
+        # word_list.extend(list((value.get_vocab_list().items() for key, value in groups.items) for key, value in groups.items()))
         while True:
             word = rand.choice(word_list)
 
