@@ -44,10 +44,9 @@ class MenuState(State):
         print('?? - display this message\n')
 
     def display(self):
-        in_menu = True
         self.print_help()
 
-        while in_menu:
+        while True:
             
 
             user_input = input('[>] ')
@@ -131,7 +130,7 @@ class GameState(State):
 
     def print_help(self):
         print('Available commands:')
-        print('<< - go back')
+        print('<< - go back to menu')
         print('!! - quit')
         print('?? - display this message\n')
 
@@ -141,15 +140,17 @@ class GameState(State):
 
         groups = self.flashcards.active_groups
 
-        user_input = ''
-
-        while user_input != '!!':
+        while True:
 
             group_name, word_list = rand.choice(list(groups.items()))
             word = rand.choice(list(word_list.get_vocab_list().items()))
             user_input = input(word[0] + ': ')
             if user_input == word[1]:
                 stat.print_success('Correct!')
+            elif user_input == '<<':
+                self.flashcards.state = self.flashcards.menu_state
+            elif user_input == '??':
+                self.print_help()
             elif user_input == '!!':
                 print('Bye, bitch.')
                 sys.exit(0)
