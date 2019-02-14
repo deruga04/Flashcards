@@ -1,4 +1,6 @@
 import unittest
+import sys
+sys.path.append('../flashcards')
 import vocab
 
 class VocabTest(unittest.TestCase):
