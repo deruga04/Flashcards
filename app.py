@@ -1,4 +1,4 @@
-import flashcards
+from flashcards import Flashcards
 import sys
 
-fc = flashcards.Flashcards(sys.argv)
+fc = Flashcards.Flashcards(sys.argv)

@@ -1,7 +1,6 @@
 import unittest
 import sys
-sys.path.append('../flashcards')
-from flashcards import *
+from flashcards.Flashcards import Flashcards
 
 class FlashcardsTest(unittest.TestCase):
 
